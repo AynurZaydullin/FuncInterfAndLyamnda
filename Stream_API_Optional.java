@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -32,7 +33,12 @@ public class Stream_API_Optional {
         List<Integer> maxMin = stream.sorted(order).collect(Collectors.toList());
         // Передача в minMaxConsumer минимального и максимального значения.
         // Так как список сортируется в порядке возрастания, то минимальный элемент будет в начале списка, а максимальный - в конце.
-        minMaxConsumer.accept(maxMin.get(0), maxMin.get(maxMin.size()-1));
+        if (maxMin.isEmpty()) {
+            minMaxConsumer.accept(null, null);// Если стрим будет пустой,
+            // то минимальный и максимальный элемент будут равны null.
+        } else {
+            minMaxConsumer.accept(maxMin.get(0), maxMin.get(maxMin.size()-1));
+        }
     }
 
     public static void printEvenNumbersAndTheirCount(List<Integer> integerList) {
@@ -45,5 +51,4 @@ public class Stream_API_Optional {
          */
     }
 }
-
 
